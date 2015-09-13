@@ -1,4 +1,4 @@
-node-etml
+etml
 ===
 **E**nhanced **T**ext **M**arkup **L**anguage
 
