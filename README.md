@@ -140,13 +140,8 @@ npm install
 
 I am open to collaborators who are interested in helping with this project in any way. If you're interested in getting involved, just shoot me an [email](mailto:chris@deacy.io). I am currently working on a syntax highlighting package for Sublime, but am open to any syntax highlighting help (including Sublime :blush:).
 
-### Debugging
-
-etml also comes with an option to use [better-fs-errors](https://github.com/chrisdothtml/better-fs-errors) for its fs error reporting. This can be enabled by passing the option `bfe: true`. The option is set to `false` by default.
-
 ### Dependencies
 
 - [async](https://github.com/caolan/async)
-- [better-fs-errors](https://github.com/chrisdothtml/better-fs-errors)
 - [defaults](https://github.com/tmpvar/defaults)
 - [JS Beautifier](https://github.com/beautify-web/js-beautify)
