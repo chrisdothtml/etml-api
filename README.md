@@ -1,6 +1,7 @@
 etml
 ===
-**E**nhanced **T**ext **M**arkup **L**anguage
+
+> A preprocessor that enhances HTML
 
 ### Usage
 
@@ -9,11 +10,11 @@ etml is available as [Node](https://github.com/chrisdothtml/node-etml) and [Grun
 About etml
 ===
 
+**E**nhanced **T**ext **M**arkup **L**anguage
+
 etml is a NodeJS-built HTML enhancer. It was inspired by the way that [SCSS](http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html) maintains all the syntax from vanilla CSS, yet enhances the way you are able to work with it. etml allows you to work with the HTML syntax you know and love, but provides some enhanced functionality to make development quicker and more efficient.
 
-I built this processor out of my own necessity, and I personally use it on most of my projects. It's the perfect tool for me, but if it's not for you, feel free to [create an issue](https://github.com/chrisdothtml/node-etml/issues) and I'll be happy to consider any changes or additions.
-
-**NOTE: I am somewhat new to the Node/npm community, and this is only my second published module. I am open to any collaborators who'd like to help with this project in any way (whether it be maintaining or offering better code solutions).**
+I built this processor out of my own necessity, and I personally use it on most of my projects. It's the perfect tool for me, but if it's not for you, feel free to [create an issue](https://github.com/chrisdothtml/etml-api/issues) and I'll be happy to consider any changes or additions.
 
 Syntax
 ===
@@ -131,22 +132,21 @@ compiles to
 etml Development
 ===
 
-etml is built with CoffeeScript and is compiled using Grunt. Development is best suited in the /src/ directory. To work on etml, clone the repo and run:
+etml is built with CoffeeScript and is compiled using Grunt. The source files can be found in the /src/ directory. To work on etml, clone the repo and run:
 
 ```
 npm install
 ```
 
+I am open to collaborators who are interested in helping with this project in any way. If you're interested in getting involved, just shoot me an [email](mailto:chris@deacy.io). I am currently working on a syntax highlighting package for Sublime, but am open to any syntax highlighting help (including Sublime :blush:).
+
 ### Debugging
 
 etml also comes with an option to use [better-fs-errors](https://github.com/chrisdothtml/better-fs-errors) for its fs error reporting. This can be enabled by passing the option `bfe: true`. The option is set to `false` by default.
 
-### Modules used
+### Dependencies
 
 - [async](https://github.com/caolan/async)
 - [better-fs-errors](https://github.com/chrisdothtml/better-fs-errors)
+- [defaults](https://github.com/tmpvar/defaults)
 - [JS Beautifier](https://github.com/beautify-web/js-beautify)
-
-### Text Editor Syntax Highlighting
-
-I am currently working on a package for Sublime, but am open to any syntax highlighting help (including Sublime :blush:).
