@@ -5,7 +5,7 @@ etml
 
 ### Usage
 
-etml is available as [Node](https://github.com/chrisdothtml/node-etml) and [Grunt](https://github.com/chrisdothtml/grunt-etml) modules.
+**NOTE**: This is the core api module and is not meant to be used on its own. etml is available for use as [Node](https://github.com/chrisdothtml/node-etml) and [Grunt](https://github.com/chrisdothtml/grunt-etml) modules.
 
 About etml
 ===
