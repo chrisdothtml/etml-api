@@ -17,10 +17,6 @@ I built this processor out of my own necessity as a front end developer who freq
 
 ### Syntax
 
-Much like the idea behind etml, the syntax was also inspired by [SCSS](http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html) (with a hint of Javascript).
-
----
-
 #### Comments
 
 One of my biggest gripes with HTML is the comments. They don't look very good, and you can't just quickly add them in. In etml, inline and block comments are supported. You can still use regular html comments if you want.
