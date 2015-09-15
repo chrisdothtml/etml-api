@@ -5,10 +5,9 @@ etml
 
 ### Usage
 
-**NOTE**: This is the core api module and is not meant to be used on its own. etml is available for use as [Node](https://github.com/chrisdothtml/node-etml) and [Grunt](https://github.com/chrisdothtml/grunt-etml) modules.
+**NOTE**: This is the core api module and is not meant to be used on its own. etml is available for use as [node-etml](https://github.com/chrisdothtml/node-etml) or [grunt-etml](https://github.com/chrisdothtml/grunt-etml).
 
-About etml
-===
+### About etml
 
 **E**nhanced **T**ext **M**arkup **L**anguage
 
@@ -16,14 +15,13 @@ etml is a NodeJS-built HTML enhancer. It was inspired by the way that [SCSS](htt
 
 I built this processor out of my own necessity, and I personally use it on most of my projects. It's the perfect tool for me, but if it's not for you, feel free to [create an issue](https://github.com/chrisdothtml/etml-api/issues) and I'll be happy to consider any changes or additions.
 
-Syntax
-===
+### Syntax
 
 Much like the idea behind etml, the syntax was also inspired by [SCSS](http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html) (with a hint of Javascript).
 
 ---
 
-### Comments
+#### Comments
 
 One of my biggest gripes with HTML is the comments. They don't look very good, and you can't just quickly add them in. In etml, inline and block comments are supported. You can still use regular html comments if you want.
 
@@ -58,7 +56,7 @@ compiles to
 
 ---
 
-### Variables
+#### Variables
 
 ````
 $variable = '';
@@ -67,7 +65,7 @@ $variable = '';
 
 ---
 
-### File Includes
+#### File Includes
 
 Files that are included to etml must use the `_file.etml` format. Files in this format can only be used in includes and will not be picked up by the compiler.
 
@@ -90,7 +88,7 @@ Providing the leading underscore and file extension are optional in file imports
 ````
 ---
 
-### Escaping
+#### Escaping
 
 If you need to escape an expression in etml, it's as simple as putting a `\` in front of it. Example:
 
@@ -113,7 +111,7 @@ $variable: 'value';
 
 ---
 
-### Short Tags
+#### Short Tags
 
 etml comes with some custom tags that are shortcuts for other tags. These are optional, but can make code more readable. Also, all short tags will honor any additional attributes you have on them.
 
@@ -129,8 +127,7 @@ compiles to
 <script type="text/javascript" src="core.js"></script>
 ````
 
-etml Development
-===
+### etml Development
 
 etml is built with CoffeeScript and is compiled using Grunt. The source files can be found in the /src/ directory. To work on etml, clone the repo and run:
 
