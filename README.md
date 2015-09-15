@@ -5,15 +5,15 @@ etml
 
 ### Usage
 
-**NOTE**: This is the core api module and is not meant to be used on its own. etml is available for use as [node-etml](https://github.com/chrisdothtml/node-etml) or [grunt-etml](https://github.com/chrisdothtml/grunt-etml).
+This is the core api module and is not meant to be used on its own. etml is available for use as [node-etml](https://github.com/chrisdothtml/node-etml) or [grunt-etml](https://github.com/chrisdothtml/grunt-etml).
 
 ### About etml
 
 **E**nhanced **T**ext **M**arkup **L**anguage
 
-etml is a NodeJS-built HTML enhancer. It was inspired by the way that [SCSS](http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html) maintains all the syntax from vanilla CSS, yet enhances the way you are able to work with it. etml allows you to work with the HTML syntax you know and love, but provides some enhanced functionality to make development quicker and more efficient.
+etml is a Node-built HTML enhancer. It was inspired by the way that [SCSS](http://sass-lang.com/documentation/file.SCSS_FOR_SASS_USERS.html) works with vanilla CSS syntax, yet extends it to allow you to do more programmatic things. etml allows you to work with the HTML syntax you know and love, but provides some enhanced functionality to make development quicker and more efficient.
 
-I built this processor out of my own necessity, and I personally use it on most of my projects. It's the perfect tool for me, but if it's not for you, feel free to [create an issue](https://github.com/chrisdothtml/etml-api/issues) and I'll be happy to consider any changes or additions.
+I built this processor out of my own necessity as a front end developer who frequently needs to build out standalone project mockups. It's the perfect tool for me; if it's not for you, feel free to send an [issue/request](https://github.com/chrisdothtml/etml-api/issues) and I'll be happy to consider any changes or additions.
 
 ### Syntax
 
