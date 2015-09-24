@@ -13,8 +13,12 @@ comment
 	type: String (startBlock, endBlock)
 include
 	url: String
+short-tag
+	tag: String
+	attrs: Object
 variable
 	action: String (define, call)
+	file: Object
 	name: String
 	value: String
 	scope: String (global, filename)
@@ -24,10 +28,7 @@ eos
 ###
 TODO
 
--built-in tags
 -line numbers
--standardize warnings/errors
-	-possibly merge warnings into errors
 -work out feature disabling (comments: false)
 -variable scope
 -figure out how to maybe have token children (variable calls within variable definitions, etc)
@@ -36,45 +37,38 @@ TODO
 
 'use strict'
 
-module.exports = (str, filename, options) ->
-	tokenizer = new Tokenizer str, filename, options
-	return tokenizer.getTokens()
+# etml modules
+error = require './error'
+
+module.exports = (file, options) ->
+	tokenizer = new Tokenizer file, options
+	tokenizer.tokenize()
 
 module.exports.Tokenizer = Tokenizer
 
 ###
  * Tokenizer()
- * Initializes `Tokenizer` with the provided `str`
+ * Initializes `Tokenizer` with the provided file and options
 ###
-Tokenizer = (str, filename, options) ->
-	str = str.replace /^\uFEFF/, ''
-
+Tokenizer = (file, options) ->
+	@file = file
 	@options = options
-	@input = str.replace /\r\n|\r/g, '\n'
-	@origInput = @input
-	@filename = filename
+	@input = file.contents.replace(/^\uFEFF/, '').replace(/\r\n|\r/g, '\n')
 
 	@tokens = []
 	@done = false
+
+	return null
 
 Tokenizer.prototype =
 	constructor: Tokenizer
 
 	###
-	 * warn()
-	 * Logs a warning message if warning is enabled
-	###
-	warn: (message) ->
-		if @options.warnings
-			console.log 'WARNING: ' + message
-
-	###
 	 * error()
-	 * Throws an error message
+	 * Sends to the error module
 	###
 	error: (message) ->
-		err = 'ERROR: ' + message
-		throw err
+		error message, @file
 
 	###
 	 * token()
@@ -214,10 +208,38 @@ Tokenizer.prototype =
 					@tokens.push @token 'include',
 						url: captures[1]
 				else
-					@warn 'Missing semicolon ; for @include'
+					@error 'Missing semicolon ; for @include'
 					@tokens.push @token 'text',
 						value: captures[0]
 				
+			@consume captures[0].length
+			return true
+
+	###
+	 * tags()
+	 * Built-in tags
+	###
+	tags: ->
+		if captures = /^<([\w]*) ([^\n]*)>/.exec @input
+			save = remove = []
+
+			if captures[1] is 'site' then save = ['title', 'responsive', 'description']
+			else if captures[1] is 'css' then remove = ['rel', 'type', 'href']
+			else if captures[1] is 'js' then remove = ['type', 'src']
+
+			attrs = {}
+			regex = /([\w-]+)=['"]?([^'"\n]+)['"]?/g
+			while capture = regex.exec captures[0]
+				attr = capture[1]
+				value = capture[2]
+
+				if save.indexOf(attr) > -1 or remove.indexOf(attr) < 0
+					attrs[attr] = value
+
+			@tokens.push @token 'short-tag',
+				tag: captures[1]
+				attrs: attrs
+
 			@consume captures[0].length
 			return true
 
@@ -226,7 +248,7 @@ Tokenizer.prototype =
 	 * Variable definitions
 	###
 	variableDefine: ->
-		if captures = /^\\?\$([\w-]+): ?['"]([^'";]*)['"]?;?/.exec @input
+		if captures = /^\\?\$([\w-]+): ?['"]([^'";\n]*)['"]?;?/.exec @input
 
 			if captures[0].substring(0,1) is '\\'
 				@tokens.push @token 'text',
@@ -240,7 +262,7 @@ Tokenizer.prototype =
 						name: captures[1]
 						value: captures[2]
 				else
-					@warn 'Missing semicolon ; for variable definition'
+					@error 'Missing semicolon ; for variable definition'
 					@tokens.push @token 'text',
 						value: captures[0]
 
@@ -260,6 +282,7 @@ Tokenizer.prototype =
 			else
 				@matches captures[0]
 				@tokens.push @token 'variable',
+					file: @file
 					action: 'call'
 					name: captures[1]
 
@@ -282,6 +305,7 @@ Tokenizer.prototype =
 				|\\?\/\*
 				|\\?\*\/
 				|\\?@include\s?['"][\w\.\/-]*['"];?
+				|<(?:js|css|site)[^\n]*>
 				|\\?\$[\w-]+:\s?['"][^'"]*['"];?
 				|\\?\{\$[\w-]+\}?
 				|<script
@@ -306,7 +330,7 @@ Tokenizer.prototype =
 	 * Fails to match any other type
 	###
 	fail: ->
-		console.log @tokens
+		if @options.debug then console.log @tokens
 		@error 'Unexpected text found'
 
 	###
@@ -314,13 +338,22 @@ Tokenizer.prototype =
 	 * Moves to the next token
 	###
 	advance: ->
-
-		return @eos() or @blank() or @scripts() or @comment() or @include() or @variableDefine() or @variableCall() or @text() or @fail()
+		return \
+			@eos() or
+			@blank() or
+			@scripts() or
+			@comment() or
+			@include() or
+			@tags() or
+			@variableDefine() or
+			@variableCall() or
+			@text() or
+			@fail()
 
 	###
-	 * getTokens()
+	 * tokenize()
 	 * Returns array of tokens for the source
 	###
-	getTokens: ->
+	tokenize: ->
 		while not @done then @advance()
 		return @tokens
