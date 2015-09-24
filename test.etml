@@ -1,0 +1,41 @@
+###
+	# TEST FILE #
+	# REGEX TO CONVERT TO USABLE STRING #
+	find: \n replace: \\n
+	find: \t replace: \\t
+	find: ' replace: \'
+	# INSERT USABLE STRING INTO `src` WITHIN `test.js` #
+###
+// File: contact
+// General Variables
+$name: 'Chris';
+$this: 'etml';
+
+\// Site Variables
+$site-title: 'Awesome Website';
+$site-desc: 'A wonderful website built using {$this}';
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<site title="{$site-title}" responsive="true" description="{$site-desc}" />
+
+		// Vendor Styles
+		<css id="vendor-css" url="vendor.min.css" />
+
+		// Site Styles
+		<css url="core.min.css" />
+	</head>
+	<body>
+
+		@include 'inc/_header.etml';
+
+		<h1>Hi, {$name}! Meet {$this}.</h1>
+
+		// Vendor Scripts
+		<js url="vendor.min.js" />
+
+		// Site Scripts
+		<js url="core.min.js" />
+	</body>
+</html>
