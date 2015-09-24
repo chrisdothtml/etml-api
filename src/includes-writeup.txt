@@ -1,0 +1,11 @@
+find all import tokens, if the file name is not in `included` arr, tokenize it
+
+when included tokens return
+	-add variables to new variable object (within parent variables object) keyed by filename
+
+add import and included tokens to `included` arr
+
+Loop through `included` arr
+	-merge new tokens in place of original import token using http://prntscr.com/8fkm6k
+
+begin parsing new, full, tokens array
